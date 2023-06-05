@@ -1,4 +1,5 @@
 require("dotenv").config();
+const e = require("express");
 const express = require("express");
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -33,6 +34,11 @@ app.post("/ask", async (req, res) => {
     });
   } catch (error) {
     console.log(error.Error + error.message + error.prompt);
+    return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    // return error.Error + error.message + error.prompt;
   }
 });
 
